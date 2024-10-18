@@ -13,7 +13,7 @@ export default function ProductCard() {
             sizes='(max-width: 768px) 85vw, (max-width: 1200px) 50vw, 35vw'
             alt='some'
          />
-         <div className='flex flex-col justify-center w-full gap-2 group-hover:invert'>
+         <div className='flex flex-col justify-center w-full gap-2 group-hover:invert ease-in-out duration-300'>
             <span className='line-clamp-1 text-muted text-xxs uppercase tracking-tight '>Apple</span>
             <div className='flex justify-between items-center'>
                <h2 className='uppercase line-clamp-1 text-xs'>IPHONE 15 pro</h2>
