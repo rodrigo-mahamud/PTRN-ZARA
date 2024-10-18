@@ -1,3 +1,5 @@
+import ProductGrid from "@/components/Product/ProductGrid";
+
 export default function Home() {
-   return <>hola</>;
+   return <ProductGrid></ProductGrid>;
 }
