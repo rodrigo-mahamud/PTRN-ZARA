@@ -10,16 +10,15 @@ export default function ProductImage({ data }: { data: Product }) {
    const selectedColor = data.colorOptions.find((color) => color.name === selectedColorName) || data.colorOptions[0];
 
    return (
-      <div className='aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden'>
+      <div className='w-full aspect-square overflow-hidden relative'>
          {selectedColor.imageUrl && selectedColor.imageUrl !== " " && (
             <Image
                src={selectedColor.imageUrl}
                alt='{`${data.name} in ${selectedColor.name}`}'
-               width={500}
-               height={500}
-               layout='responsive'
-               objectFit='contain'
-               className='w-full h-full object-center object-cover'
+               fill
+               quality={50}
+               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 45vw'
+               className='w-full h-full object-center object-contain'
             />
          )}
       </div>

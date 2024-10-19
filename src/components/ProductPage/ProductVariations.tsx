@@ -29,13 +29,13 @@ export default function ProductVariations({ data }: { data: Product }) {
       <>
          {/* Storage options */}
          <div className='mt-8'>
-            <h3 className='text-sm font-medium text-gray-900'>STORAGE (HOW MUCH SPACE DO YOU NEED?)</h3>
-            <div className='mt-4 flex space-x-3'>
+            <h3 className='font-light'>STORAGE HOW MUCH SPACE DO YOU NEED?</h3>
+            <div className='mt-4 flex'>
                {data.storageOptions.map((option) => (
                   <button
                      key={option.capacity}
-                     className={`px-4 py-2 border rounded-md  ${
-                        selectedStorage.capacity === option.capacity ? "border-blue-500 text-blue-500" : "border-gray-300 text-gray-700"
+                     className={`h-20 w-32 text-lg border ${
+                        selectedStorage.capacity === option.capacity ? "border-black text-black" : "border-gray-300 text-gray-700"
                      }`}
                      onClick={() => handleStorageChange(option.capacity)}>
                      {option.capacity}
@@ -45,13 +45,13 @@ export default function ProductVariations({ data }: { data: Product }) {
          </div>
          {/* Color options */}
          <div className='mt-8'>
-            <h3 className='text-sm font-medium text-gray-900'>COLOR: PICK YOUR FAVOURITE</h3>
-            <div className='mt-4 flex space-x-3'>
+            <h3 className='font-light'>COLOR: PICK YOUR FAVOURITE</h3>
+            <div className='mt-4 flex gap-3'>
                {data.colorOptions.map((color) => (
                   <button
                      key={color.name}
-                     className={`w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-                        selectedColor.name === color.name ? "ring-2 ring-blue-500" : ""
+                     className={`w-8 h-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black ${
+                        selectedColor.name === color.name ? "ring-2 ring-black" : ""
                      }`}
                      style={{ backgroundColor: color.hexCode }}
                      onClick={() => handleColorChange(color.name)}

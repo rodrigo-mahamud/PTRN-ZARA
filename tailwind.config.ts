@@ -15,7 +15,7 @@ const config: Config = {
             xxs: "0.625rem",
          },
          fontFamily: {
-            sans: ["var(--helvetica)"],
+            sans: ["var(--font-helvetica-neue),"],
          },
          colors: {
             background: "var(--background)",
