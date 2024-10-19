@@ -1,5 +1,8 @@
 "use server";
 
+const API_URL = process.env.API_URL;
+const API_KEY = process.env.API_KEY;
+
 import { promises as fs } from "fs";
 import path from "path";
 import sharp from "sharp";
@@ -12,7 +15,7 @@ export async function fetchAPI(endpoint: string, options: RequestInit = {}) {
       ...options.headers,
    };
 
-   const response = await fetch(`${API_URL}`, {
+   const response = await fetch(`${API_URL}/${endpoint}`, {
       ...options,
       headers,
    });
@@ -22,14 +25,6 @@ export async function fetchAPI(endpoint: string, options: RequestInit = {}) {
    }
 
    return response.json();
-}
-
-export async function getProducts() {
-   return fetchAPI("/products");
-}
-
-export async function getProduct(id: string) {
-   return fetchAPI(`/products/${id}`);
 }
 
 const FIXED_HEIGHT = 500;
