@@ -2,7 +2,14 @@
 const nextConfig = {
    reactStrictMode: true,
    images: {
-      domains: ["prueba-tecnica-api-tienda-moviles.onrender.com"],
+      remotePatterns: [
+         {
+            protocol: "http",
+            hostname: "prueba-tecnica-api-tienda-moviles.onrender.com",
+            port: "",
+            pathname: "/images/**",
+         },
+      ],
    },
 };
 

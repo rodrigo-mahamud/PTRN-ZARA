@@ -23,7 +23,7 @@ export default function RootLayout({
       <html lang='en'>
          <body className={`${helvetica.variable} arial sans-serif antialiased `}>
             <Header></Header>
-            <main className='container'>{children}</main>
+            <main className=''>{children}</main>
          </body>
       </html>
    );
