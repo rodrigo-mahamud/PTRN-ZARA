@@ -32,10 +32,11 @@ body {
    position: absolute;
    background-color: #000;
    bottom: 0;
+   left: 0;
    z-index: -1;
    transition: height 0.5s ease-in;
 }
 .hoverProduct:hover:before {
    height: 100%;
-   transition: height 0.75s ease-out;
+   transition: height 0.5s ease-out;
 }

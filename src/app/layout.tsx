@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "../assets/globals.css";
 import Header from "@/components/Header/Header";
 
 const helvetica = localFont({
-   src: "./fonts/HelveticaNowVar.ttf",
+   src: "../assets/fonts/HelveticaNowVar.ttf",
    variable: "--helvetica",
    weight: "100 900",
 });
