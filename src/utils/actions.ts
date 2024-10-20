@@ -35,7 +35,7 @@ export async function fetchAPI(endpoint: string, search?: string) {
 
 export async function processImage(imageUrl: string): Promise<string> {
    try {
-      const response = await fetch(imageUrl, { cache: "no-store" });
+      const response = await fetch(imageUrl);
       if (!response.ok) {
          throw new Error(`Failed to fetch image: ${response.statusText}`);
       }
@@ -49,7 +49,7 @@ export async function processImage(imageUrl: string): Promise<string> {
             fit: "contain",
             background: { r: 255, g: 255, b: 255, alpha: 0 },
          })
-         .webp({ quality: 25 }) // OUTPUT_QUALITY
+         .webp({ quality: 50 }) // OUTPUT_QUALITY
          .toBuffer();
 
       // Convert the processed image buffer to a Base64 string
