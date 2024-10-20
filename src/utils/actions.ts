@@ -6,19 +6,25 @@ import crypto from "crypto";
 const API_URL = process.env.API_URL;
 const API_KEY = process.env.API_KEY;
 
-export async function fetchAPI(endpoint: string, options: RequestInit = {}) {
-   // //To show the skeleton only
-   // await new Promise((resolve) => setTimeout(resolve, 500000000));
+//Extend vercel runtime duration
+export const maxDuration = 60;
+
+export async function fetchAPI(endpoint: string, search?: string) {
+   //To force the skeletons only
+   // await new Promise((resolve) => setTimeout(resolve, 500));
 
    if (API_KEY && API_URL) {
       const headers = {
          "Content-Type": "application/json",
          "x-api-key": API_KEY,
-         ...options.headers,
       };
 
-      const response = await fetch(`${API_URL}/${endpoint}`, {
-         ...options,
+      let url = `${API_URL}/${endpoint}`;
+      if (search) {
+         url += `?search=${encodeURIComponent(search)}`;
+      }
+
+      const response = await fetch(url, {
          headers,
       });
 
@@ -29,7 +35,6 @@ export async function fetchAPI(endpoint: string, options: RequestInit = {}) {
       return response.json();
    }
 }
-
 const PROCESSED_IMAGES_DIR = path.join(process.cwd(), "public", "processed-images");
 const FIXED_HEIGHT = 500;
 const OUTPUT_QUALITY = 80;

@@ -25,7 +25,7 @@ export default async function ProductInfo({ id }: { id: string }) {
 
                <button
                   type='button'
-                  className='w-full bg-black/5 py-4 px-8 flex items-center justify-center text-sm font-light tracking-tight text-black/20 hover:bg-black ease-in-out duration-300'>
+                  className='w-full bg-black/5 py-4 px-8 flex items-center justify-center text-sm font-light tracking-tight text-black/20 hover:bg-[#1B1A18] hover:text-white ease-in-out duration-300'>
                   AÑADIR
                </button>
             </div>
