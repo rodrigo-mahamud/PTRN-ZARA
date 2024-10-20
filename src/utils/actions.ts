@@ -6,22 +6,24 @@ const API_KEY = process.env.API_KEY;
 import sharp from "sharp";
 
 export async function fetchAPI(endpoint: string, options: RequestInit = {}) {
-   const headers = {
-      "Content-Type": "application/json",
-      "x-api-key": API_KEY,
-      ...options.headers,
-   };
+   if (API_KEY && API_URL) {
+      const headers = {
+         "Content-Type": "application/json",
+         "x-api-key": API_KEY,
+         ...options.headers,
+      };
 
-   const response = await fetch(`${API_URL}/${endpoint}`, {
-      ...options,
-      headers,
-   });
+      const response = await fetch(`${API_URL}/${endpoint}`, {
+         ...options,
+         headers,
+      });
 
-   if (!response.ok) {
-      throw new Error(`API error: ${response.status} ${response.statusText}`);
+      if (!response.ok) {
+         throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+
+      return response.json();
    }
-
-   return response.json();
 }
 
 const FIXED_HEIGHT = 500;
