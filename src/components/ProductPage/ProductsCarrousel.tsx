@@ -57,7 +57,7 @@ export default function ProductsCarrousel({ similarProducts }: ProductsCarrousel
                                  fill
                                  className='size-full object-contain'
                                  quality={25}
-                                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
                               />
                            </div>
                            <div className='flex flex-col justify-center w-full gap-2 group-hover:invert ease-in-out duration-300'>

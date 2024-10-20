@@ -1,6 +1,9 @@
 import ProductInfo from "@/components/ProductPage/ProductInfo";
 import ProductRelated from "@/components/ProductPage/ProductRelated";
 import ProductSpecs from "@/components/ProductPage/ProductSpecs";
+import SkeletonProductInfo from "@/components/Skeletons/SkeletonProductInfo";
+import SkeletonProductRelated from "@/components/Skeletons/SkeletonProductRelated";
+import SkeletonProductSpecs from "@/components/Skeletons/SkeletonProductSpecs";
 import { Suspense } from "react";
 
 export default async function ProductPage({ params }: { params: { segments: string[] } }) {
@@ -8,13 +11,13 @@ export default async function ProductPage({ params }: { params: { segments: stri
 
    return (
       <>
-         <Suspense fallback='...Loading'>
+         <Suspense fallback={<SkeletonProductInfo></SkeletonProductInfo>}>
             <ProductInfo id={id} />
          </Suspense>
-         <Suspense fallback='...Loading'>
+         <Suspense fallback={<SkeletonProductSpecs></SkeletonProductSpecs>}>
             <ProductSpecs id={id} />
          </Suspense>
-         <Suspense fallback='...Loading'>
+         <Suspense fallback={<SkeletonProductRelated></SkeletonProductRelated>}>
             <ProductRelated id={id} />
          </Suspense>
       </>

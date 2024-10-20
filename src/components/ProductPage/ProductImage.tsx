@@ -16,8 +16,8 @@ export default function ProductImage({ data }: { data: Product }) {
                src={selectedColor.imageUrl}
                alt='{`${data.name} in ${selectedColor.name}`}'
                fill
-               quality={50}
-               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 45vw'
+               quality={75}
+               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw'
                className='w-full h-full object-center object-contain'
             />
          )}

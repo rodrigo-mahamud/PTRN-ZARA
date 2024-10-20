@@ -16,7 +16,6 @@ export default async function ProductRelated({ id }: { id: string }) {
          return { ...product, processedImageUrl };
       })
    );
-   console.log(processedSimilarProducts);
 
    return (
       <div className='pb-48 pt-24 overflow-hidden'>
