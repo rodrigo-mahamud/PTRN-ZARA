@@ -36,6 +36,6 @@ yarn-error.log*
 next-env.d.ts
 
 .env
-/public/processed-images/*
-!public/processed-images/.gitkeep
+/public/processedImages/*
+!public/processedImages/.gitkeep
 certificates

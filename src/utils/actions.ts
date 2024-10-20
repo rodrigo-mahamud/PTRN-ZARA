@@ -34,7 +34,7 @@ export async function fetchAPI(endpoint: string, search?: string) {
       return response.json();
    }
 }
-const PROCESSED_IMAGES_DIR = path.join(process.cwd(), "public", "processed-images");
+const PROCESSED_IMAGES_DIR = path.join(process.cwd(), "public", "processedImages");
 const FIXED_HEIGHT = 500;
 const OUTPUT_QUALITY = 80;
 
@@ -49,7 +49,7 @@ async function getProcessedImagePath(fileName: string): Promise<string | null> {
    const processedPath = path.join(PROCESSED_IMAGES_DIR, `${fileName}.webp`);
    try {
       await fs.access(processedPath);
-      return `/processed-images/${fileName}.webp`;
+      return `/processedImages/${fileName}.webp`;
    } catch {
       return null;
    }
@@ -84,13 +84,13 @@ export async function processImage(imageUrl: string): Promise<string> {
          .webp({ quality: OUTPUT_QUALITY })
          .toBuffer();
 
-      // Ensure the processed-images directory exists
+      // Ensure the processedImages directory exists
       await fs.mkdir(PROCESSED_IMAGES_DIR, { recursive: true });
 
       // Save the processed image
       await fs.writeFile(processedPath, processedImageBuffer);
 
-      return `/processed-images/${fileName}.webp`;
+      return `/processedImages/${fileName}.webp`;
    } catch (error) {
       console.error("Error processing image:", error);
       return imageUrl; // Fallback to original image if processing fails
