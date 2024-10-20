@@ -7,7 +7,6 @@ const API_URL = process.env.API_URL;
 const API_KEY = process.env.API_KEY;
 
 //Extend vercel runtime duration
-export const maxDuration = 60;
 
 export async function fetchAPI(endpoint: string, search?: string) {
    //To force the skeletons only
