@@ -11,8 +11,6 @@ export interface ProductDataTypes {
 }
 
 //PRODUCT PAGE
-// types.ts
-
 export type ColorOption = {
    name: string;
    hexCode: string;
@@ -55,4 +53,16 @@ export type Product = {
    colorOptions: ColorOption[];
    storageOptions: StorageOption[];
    similarProducts: SimilarProduct[];
+};
+
+export type NormalizedImageProps = {
+   src: string;
+   alt: string;
+   width?: number;
+   height?: number;
+   fill?: boolean;
+   className?: string;
+   sizes?: string;
+   quality?: number;
+   priority?: boolean;
 };

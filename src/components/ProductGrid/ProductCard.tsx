@@ -1,26 +1,24 @@
 import { ProductDataTypes } from "@/Types/types";
-import { processImage } from "@/utils/actions";
-import formatSlug from "@/utils/formatSlug";
-import Image from "next/image";
+
 import Link from "next/link";
 import React from "react";
+import NormalizedImage from "../NormalizedImage";
+import formatSlug from "@/utils/formatSlug";
 
 export default async function ProductCard({ productsData }: ProductDataTypes) {
-   const processedImageUrl = await processImage(productsData.imageUrl);
    const productSlug = formatSlug(productsData.brand, productsData.name);
-
    return (
       <Link
          href={`/product/${productSlug}/${productsData.id}`}
          className='hoverProduct group p-4 w-full bg-red border-r border-b border-black flex flex-col items-center justify-center relative'>
          <div className='relative w-4/6 m-16 aspect-square'>
-            <Image
-               src={processedImageUrl}
+            <NormalizedImage
+               src={productsData.imageUrl}
+               alt={productsData.name}
                fill
                className='size-full object-contain'
                quality={20}
                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
-               alt={productsData.name}
             />
          </div>
          <div className='flex flex-col justify-center w-full gap-2 group-hover:invert ease-in-out duration-300'>

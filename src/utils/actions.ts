@@ -1,8 +1,6 @@
 "use server";
 import sharp from "sharp";
-import path from "path";
-import fs from "fs/promises";
-import crypto from "crypto";
+
 const API_URL = process.env.API_URL;
 const API_KEY = process.env.API_KEY;
 
@@ -34,39 +32,9 @@ export async function fetchAPI(endpoint: string, search?: string) {
       return response.json();
    }
 }
-const PROCESSED_IMAGES_DIR = path.join(process.cwd(), "public", "processedImages");
-const FIXED_HEIGHT = 500;
-const OUTPUT_QUALITY = 80;
-
-function generateReadableFileName(url: string): string {
-   const urlObj = new URL(url);
-   const baseName = path.basename(urlObj.pathname).split(".")[0];
-   const hash = crypto.createHash("md5").update(url).digest("hex").slice(0, 6);
-   return `${baseName}-${hash}`;
-}
-
-async function getProcessedImagePath(fileName: string): Promise<string | null> {
-   const processedPath = path.join(PROCESSED_IMAGES_DIR, `${fileName}.webp`);
-   try {
-      await fs.access(processedPath);
-      return `/processedImages/${fileName}.webp`;
-   } catch {
-      return null;
-   }
-}
 
 export async function processImage(imageUrl: string): Promise<string> {
    try {
-      const fileName = generateReadableFileName(imageUrl);
-
-      // Check if the processed image already exists
-      const existingPath = await getProcessedImagePath(fileName);
-      if (existingPath) {
-         return existingPath;
-      }
-
-      const processedPath = path.join(PROCESSED_IMAGES_DIR, `${fileName}.webp`);
-
       const response = await fetch(imageUrl, { cache: "no-store" });
       if (!response.ok) {
          throw new Error(`Failed to fetch image: ${response.statusText}`);
@@ -77,22 +45,20 @@ export async function processImage(imageUrl: string): Promise<string> {
       const processedImageBuffer = await sharp(buffer)
          .trim()
          .resize({
-            height: FIXED_HEIGHT,
+            height: 250, // FIXED_HEIGHT
             fit: "contain",
             background: { r: 255, g: 255, b: 255, alpha: 0 },
          })
-         .webp({ quality: OUTPUT_QUALITY })
+         .webp({ quality: 25 }) // OUTPUT_QUALITY
          .toBuffer();
 
-      // Ensure the processedImages directory exists
-      await fs.mkdir(PROCESSED_IMAGES_DIR, { recursive: true });
+      // Convert the processed image buffer to a Base64 string
+      const base64Image = processedImageBuffer.toString("base64");
 
-      // Save the processed image
-      await fs.writeFile(processedPath, processedImageBuffer);
-
-      return `/processedImages/${fileName}.webp`;
+      // Return the Base64 string with the appropriate data URL prefix
+      return `data:image/webp;base64,${base64Image}`;
    } catch (error) {
       console.error("Error processing image:", error);
-      return imageUrl; // Fallback to original image if processing fails
+      return imageUrl; // Fallback to original image URL if processing fails
    }
 }
