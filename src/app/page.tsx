@@ -1,7 +1,7 @@
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
 import { Suspense } from "react";
 
-export default async function Home({ searchParams }: { searchParams?: { search?: string } }) {
+export default function Home({ searchParams }: { searchParams?: { search?: string } }) {
    const search = searchParams?.search;
    return (
       <Suspense key={search} fallback={"....loading"}>
