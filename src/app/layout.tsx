@@ -77,7 +77,7 @@ export default function RootLayout({
       <html lang='en'>
          <body className={`${helveticaNeue.variable} arial sans-serif antialiased `}>
             <Header></Header>
-            <main className=''>{children}</main>
+            <main>{children}</main>
          </body>
       </html>
    );

@@ -26,16 +26,18 @@ export default function ProductVariations({ data }: { data: Product }) {
       replace(`${pathname}?${params.toString()}`);
    };
    return (
-      <>
+      <div className='flex flex-col gap-6'>
          {/* Storage options */}
-         <div className='mt-8'>
+         <div className='flex flex-col gap-3'>
             <h3 className='font-light'>STORAGE HOW MUCH SPACE DO YOU NEED?</h3>
-            <div className='mt-4 flex'>
+            <div className='flex'>
                {data.storageOptions.map((option) => (
                   <button
                      key={option.capacity}
-                     className={`h-20 w-32 text-lg border ${
-                        selectedStorage.capacity === option.capacity ? "border-black text-black" : "border-gray-300 text-gray-700"
+                     className={`h-16 w-28  text-sm ${
+                        selectedStorage.capacity === option.capacity
+                           ? "border border-black text-black"
+                           : "border-black/25 border border-l-0 first:border-l text-gray-700"
                      }`}
                      onClick={() => handleStorageChange(option.capacity)}>
                      {option.capacity}
@@ -44,22 +46,26 @@ export default function ProductVariations({ data }: { data: Product }) {
             </div>
          </div>
          {/* Color options */}
-         <div className='mt-8'>
+         <div className='flex flex-col gap-3'>
             <h3 className='font-light'>COLOR: PICK YOUR FAVOURITE</h3>
-            <div className='mt-4 flex gap-3'>
-               {data.colorOptions.map((color) => (
-                  <button
-                     key={color.name}
-                     className={`w-8 h-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black ${
-                        selectedColor.name === color.name ? "ring-2 ring-black" : ""
-                     }`}
-                     style={{ backgroundColor: color.hexCode }}
-                     onClick={() => handleColorChange(color.name)}
-                     aria-label={color.name}
-                  />
-               ))}
+            <div className='flex flex-col'>
+               <div className='flex gap-4'>
+                  {data.colorOptions.map((color) => (
+                     <div
+                        key={color.name}
+                        className={`size-7 p-px border-2 ${selectedColor.name !== color.name ? "border-black/25 " : "border-black "}`}>
+                        <button
+                           className='size-full'
+                           style={{ backgroundColor: color.hexCode }}
+                           onClick={() => handleColorChange(color.name)}
+                           aria-label={color.name}
+                        />
+                     </div>
+                  ))}
+               </div>
+               <span className='text-xs mt-3'>{selectedColor.name}</span>
             </div>
          </div>
-      </>
+      </div>
    );
 }

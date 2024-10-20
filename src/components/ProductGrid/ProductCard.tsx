@@ -8,7 +8,6 @@ import React from "react";
 export default async function ProductCard({ productsData }: ProductDataTypes) {
    const processedImageUrl = await processImage(productsData.imageUrl);
    const productSlug = formatSlug(productsData.brand, productsData.name);
-   console.log(productsData.imageUrl);
 
    return (
       <Link
