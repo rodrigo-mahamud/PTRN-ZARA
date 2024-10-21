@@ -14,16 +14,18 @@ export default function CartPage() {
    };
 
    return (
-      <div className='container h-screen font-sans'>
-         <div className='flex flex-col justify-between h-full pt-20'>
-            <div className='mb-8'>
-               <div className='flex flex-col items-start'>
-                  <h1 className='text-2xl font-normal my-16'>CART ({cartItems.length})</h1>
-                  <CartItems items={groupedCartItems} onRemove={handleRemove} />
+      <>
+         <div className='container h-screen font-sans w-screen'>
+            <div className='flex flex-col justify-between py-20'>
+               <div className='mb-8'>
+                  <div className='flex flex-col items-start'>
+                     <h1 className='text-2xl font-normal my-16'>CART ({cartItems.length})</h1>
+                     <CartItems items={groupedCartItems} onRemove={handleRemove} />
+                  </div>
                </div>
             </div>
             <CartFooter total={total} />
          </div>
-      </div>
+      </>
    );
 }
