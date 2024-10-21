@@ -18,7 +18,7 @@ export default function ProductSearch({ productsAmount }: { productsAmount: numb
    }, 375);
 
    return (
-      <div className='sticky top-20 bg-white z-50 w-full'>
+      <div className='fixed top-20 bg-white z-50 w-full'>
          <div className='py-6 w-full container'>
             <input
                defaultValue={searchParams.get("search")?.toString()}
@@ -26,7 +26,7 @@ export default function ProductSearch({ productsAmount }: { productsAmount: numb
                className='w-full mb-3 py-2 focus-visible:outline-none border-b border-black'
                placeholder='Buscar smartphone...'
             />
-            <span className='tracking-tight'>{productsAmount} RESULTADOS</span>
+            <span className='tracking-tight text-sm font-light'>{productsAmount} RESULTADOS</span>
          </div>
       </div>
    );

@@ -10,6 +10,7 @@ export default function ProductVariations({ data }: { data: Product }) {
    const pathname = usePathname();
    const { replace } = useRouter();
    const { addToCart } = useCart();
+   console.log(data);
 
    const selectedColorName = searchParams.get("color");
    const selectedStorageCapacity = searchParams.get("storage");
@@ -30,11 +31,20 @@ export default function ProductVariations({ data }: { data: Product }) {
    };
    const handleAddToCart = () => {
       if (selectedColor && selectedStorage) {
-         addToCart({
+         const cartItem = {
             id: data.id,
-            color: selectedColor.name,
-            storage: selectedStorage.capacity,
-         });
+            brand: data.brand,
+            name: data.name,
+            description: data.description,
+            basePrice: data.basePrice,
+            rating: data.rating,
+            specs: data.specs,
+            colorOptions: data.colorOptions,
+            storageOptions: data.storageOptions,
+            selectedColor: selectedColor.name,
+            selectedStorage: selectedStorage.capacity,
+         };
+         addToCart(cartItem);
          toast.success(`${data.name} añadido al carrito`);
       }
    };

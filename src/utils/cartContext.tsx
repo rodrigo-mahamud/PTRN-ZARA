@@ -1,19 +1,6 @@
 "use client";
+import { CartContextType, CartItem } from "@/Types/types";
 import React, { createContext, useState, useContext, useEffect, useCallback } from "react";
-
-type CartItem = {
-   id: string;
-   color: string;
-   storage: string;
-};
-
-type CartContextType = {
-   cartItems: CartItem[];
-   addToCart: (item: CartItem) => void;
-   removeFromCart: (itemId: string) => void;
-   cartCount: number;
-   isLoading: boolean;
-};
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -43,12 +30,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
    }, []);
 
+   const removeAllById = useCallback((itemId: string) => {
+      setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+   }, []);
+
    const cartCount = cartItems.length;
 
-   return <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, cartCount, isLoading }}>{children}</CartContext.Provider>;
+   return (
+      <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, removeAllById, cartCount, isLoading }}>{children}</CartContext.Provider>
+   );
 };
 
-export const useCart = () => {
+export const useCart = (): CartContextType => {
    const context = useContext(CartContext);
 
    if (context === undefined) {

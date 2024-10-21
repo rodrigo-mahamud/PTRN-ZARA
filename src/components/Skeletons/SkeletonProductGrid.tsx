@@ -4,6 +4,7 @@ export default function SkeletonProductGrid() {
    return (
       <div className='container animate-pulse'>
          <div className='flex mt-12 flex-col w-full'>
+            <div className='h-10 bg-gray-200 w-full mb-16 mt-2'></div>
             <div className='flex justify-start h-full items-center'>
                <div className='w-full'>
                   <div className='flex'>

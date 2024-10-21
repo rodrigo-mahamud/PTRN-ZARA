@@ -42,7 +42,6 @@ export type SimilarProduct = {
 };
 
 export type Product = {
-   slug: boolean;
    id: string;
    brand: string;
    name: string;
@@ -65,4 +64,30 @@ export type NormalizedImageProps = {
    sizes?: string;
    quality?: number;
    priority?: boolean;
+};
+
+export type CartItem = Product & {
+   selectedColor: string;
+   selectedStorage: string;
+};
+
+export type GroupedCartItem = {
+   id: string;
+   brand: string;
+   name: string;
+   basePrice: number;
+   selectedColor: string;
+   selectedStorage: string;
+   image: string;
+   amount: number;
+   totalItem: number;
+};
+
+export type CartContextType = {
+   cartItems: CartItem[];
+   addToCart: (item: CartItem) => void;
+   removeFromCart: (itemId: string) => void;
+   removeAllById: (itemId: string) => void;
+   cartCount: number;
+   isLoading: boolean;
 };

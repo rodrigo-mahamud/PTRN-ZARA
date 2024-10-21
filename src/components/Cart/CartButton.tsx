@@ -1,6 +1,7 @@
 "use client";
 import IconCart from "@/icons/IconCart";
 import { useCart } from "@/utils/cartContext";
+import Link from "next/link";
 import React from "react";
 
 export default function CartButton() {
@@ -15,10 +16,10 @@ export default function CartButton() {
    }
 
    return (
-      <div className='relative flex gap-2 items-center'>
+      <Link href='/cart' className='relative flex gap-2 items-center'>
          <IconCart />
 
          {cartCount > 0 && <span className='text-sm'>{cartCount}</span>}
-      </div>
+      </Link>
    );
 }
