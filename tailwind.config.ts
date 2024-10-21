@@ -25,5 +25,12 @@ const config: Config = {
       },
    },
    plugins: [],
+   variants: {
+      extend: {
+         backgroundColor: ["disabled"],
+         textColor: ["disabled"],
+         opacity: ["disabled"],
+      },
+   },
 };
 export default config;

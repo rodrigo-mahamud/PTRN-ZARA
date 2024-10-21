@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header/Header";
+import { Toaster } from "sonner";
+import { CartProvider } from "@/utils/cartContext";
 
 const helveticaNeue = localFont({
    src: [
@@ -76,8 +78,17 @@ export default function RootLayout({
    return (
       <html lang='en'>
          <body className={`${helveticaNeue.variable} arial sans-serif antialiased `}>
-            <Header></Header>
-            <main>{children}</main>
+            <CartProvider>
+               <Toaster
+                  richColors
+                  toastOptions={{
+                     style: {
+                        borderRadius: "0",
+                     },
+                  }}></Toaster>
+               <Header></Header>
+               {children}
+            </CartProvider>
          </body>
       </html>
    );

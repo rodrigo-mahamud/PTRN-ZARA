@@ -2,7 +2,6 @@
 import { Product } from "@/Types/types";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import React from "react";
 
 export default function ProductImage({ data }: { data: Product }) {
    const searchParams = useSearchParams();
