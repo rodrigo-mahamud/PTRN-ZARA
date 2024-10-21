@@ -18,8 +18,8 @@ export default function CartItems({ items, onRemove }: CartItemsProps) {
                         alt={group.name}
                         fill
                         className='size-full object-contain'
-                        quality={25}
-                        sizes='(max-width: 768px) 75vw, 35vw'
+                        quality={20}
+                        sizes='(max-width: 768px) 75vw, 25vw'
                      />
                   </div>
                   <div className='flex flex-col tracking-tight h-full items-start justify-between'>

@@ -8,7 +8,7 @@ const API_KEY = process.env.API_KEY;
 
 export async function fetchAPI(endpoint: string, search?: string) {
    //To force the skeletons only
-   // await new Promise((resolve) => setTimeout(resolve, 50000000));
+   await new Promise((resolve) => setTimeout(resolve, 500));
 
    if (API_KEY && API_URL) {
       const headers = {
@@ -31,6 +31,33 @@ export async function fetchAPI(endpoint: string, search?: string) {
 
       return response.json();
    }
+}
+
+export async function fetchProductsCount(search?: string): Promise<number> {
+   if (API_KEY && API_URL) {
+      const headers = {
+         "Content-Type": "application/json",
+         "x-api-key": API_KEY,
+      };
+
+      let url = `${API_URL}/products`;
+      if (search) {
+         url += `?search=${encodeURIComponent(search)}`;
+      }
+
+      const response = await fetch(url, {
+         headers,
+      });
+
+      if (!response.ok) {
+         throw new Error(`API error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return data.count; // Asumiendo que la API devuelve un objeto con una propiedad 'count'
+   }
+
+   throw new Error("API_KEY o API_URL no están definidas");
 }
 
 export async function processImage(imageUrl: string): Promise<string> {

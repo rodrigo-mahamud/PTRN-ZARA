@@ -6,14 +6,10 @@
    --foreground: #000000;
    --muted: #989898;
 }
-/* 
-@media (prefers-color-scheme: dark) {
-   :root {
-      --background: #0a0a0a;
-      --foreground: #ededed;
-   }
-} */
 
+html {
+   scrollbar-gutter: stable both-edges;
+}
 body {
    color: var(--foreground);
    background: var(--background);

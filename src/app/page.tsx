@@ -3,28 +3,30 @@ import SkeletonProductGrid from "@/components/Skeletons/SkeletonProductGrid";
 import { Suspense } from "react";
 import { Metadata } from "next";
 
+import ProductSearch from "@/components/ProductGrid/ProductSearch";
+import { fetchProductsCount } from "@/utils/actions";
+
 export const metadata: Metadata = {
    title: "Inicio | PTRN Rodrigo ",
-   description: "ejmeplsf",
+   description:
+      "Creación de una aplicación web enfocada en la visualización,búsqueda y gestión de un catálogo de teléfonos móviles. La aplicación debe permitir a los usuarios consultar detalles específicos de cada dispositivo, así como gestionar un carrito de compras de manera eficiente",
    openGraph: {
       title: "Inicio | PTRN Rodrigo ",
-      description: "ejmeplsf",
-      images: [
-         {
-            url: `https://${process.env.VERCEL_URL}/placeholder.png`,
-            width: 1200,
-            height: 630,
-            alt: "Ejemplo",
-         },
-      ],
+      siteName: "Inicio | PTRN Rodrigo ",
+      url: `${process.env.VERCEL_URL}`,
+      description:
+         "Creación de una aplicación web enfocada en la visualización,búsqueda y gestión de un catálogo de teléfonos móviles. La aplicación debe permitir a los usuarios consultar detalles específicos de cada dispositivo, así como gestionar un carrito de compras de manera eficiente ",
+
+      images: [`https://${process.env.VERCEL_URL}/metaogimage.png`],
       locale: "es_ES",
       type: "website",
    },
    twitter: {
       card: "summary_large_image",
       title: "Inicio | PTRN Rodrigo ",
-      description: "ejmeplsf",
-      images: [`https://${process.env.VERCEL_URL}/placeholder.png`],
+      description:
+         "Creación de una aplicación web enfocada en la visualización,búsqueda y gestión de un catálogo de teléfonos móviles. La aplicación debe permitir a los usuarios consultar detalles específicos de cada dispositivo, así como gestionar un carrito de compras de manera eficiente",
+      images: [`https://${process.env.VERCEL_URL}/metaogimage.png`],
    },
    icons: [
       {
@@ -38,11 +40,17 @@ export const metadata: Metadata = {
    ],
 };
 
-export default function Home({ searchParams }: { searchParams?: { search?: string } }) {
+export default async function Home({ searchParams }: { searchParams?: { search?: string } }) {
    const search = searchParams?.search;
+   const productsAmount = await fetchProductsCount(search);
+   console.log(productsAmount);
+
    return (
-      <Suspense key={search} fallback={<SkeletonProductGrid></SkeletonProductGrid>}>
-         <ProductGrid searchParam={search}></ProductGrid>
-      </Suspense>
+      <>
+         <ProductSearch productsAmount={productsAmount}></ProductSearch>
+         <Suspense key={search} fallback={<SkeletonProductGrid></SkeletonProductGrid>}>
+            <ProductGrid searchParam={search}></ProductGrid>
+         </Suspense>
+      </>
    );
 }
