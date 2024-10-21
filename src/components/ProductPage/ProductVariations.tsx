@@ -10,7 +10,6 @@ export default function ProductVariations({ data }: { data: Product }) {
    const pathname = usePathname();
    const { replace } = useRouter();
    const { addToCart } = useCart();
-   console.log(data);
 
    const selectedColorName = searchParams.get("color");
    const selectedStorageCapacity = searchParams.get("storage");

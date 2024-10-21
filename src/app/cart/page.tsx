@@ -1,31 +1,39 @@
-"use client";
-import CartFooter from "@/components/CartComponents/CartFooter";
-import CartItems from "@/components/CartComponents/CartItems";
-import { useCart } from "@/utils/cartContext";
-import groupCartItems from "@/utils/useGroupedCartItems";
+import CartClientWrapper from "@/components/CartComponents/CartClientWrapper";
 
+import { Metadata } from "next";
+export const metadata: Metadata = {
+   title: "Carrito | PTRN Rodrigo ",
+   description:
+      "Creación de una aplicación web enfocada en la visualización,búsqueda y gestión de un catálogo de teléfonos móviles. La aplicación debe permitir a los usuarios consultar detalles específicos de cada dispositivo, así como gestionar un carrito de compras de manera eficiente",
+   openGraph: {
+      title: "Carrito | PTRN Rodrigo ",
+      siteName: "Carrito | PTRN Rodrigo ",
+      url: `${process.env.VERCEL_URL}`,
+      description:
+         "Creación de una aplicación web enfocada en la visualización,búsqueda y gestión de un catálogo de teléfonos móviles. La aplicación debe permitir a los usuarios consultar detalles específicos de cada dispositivo, así como gestionar un carrito de compras de manera eficiente ",
+
+      images: [`https://${process.env.VERCEL_URL}/metaogimage.png`],
+      locale: "es_ES",
+      type: "website",
+   },
+   twitter: {
+      card: "summary_large_image",
+      title: "Carrito | PTRN Rodrigo ",
+      description:
+         "Creación de una aplicación web enfocada en la visualización,búsqueda y gestión de un catálogo de teléfonos móviles. La aplicación debe permitir a los usuarios consultar detalles específicos de cada dispositivo, así como gestionar un carrito de compras de manera eficiente",
+      images: [`https://${process.env.VERCEL_URL}/metaogimage.png`],
+   },
+   icons: [
+      {
+         url: "/images/favicon.ico",
+         media: "(prefers-color-scheme: dark)",
+      },
+      {
+         url: "/images/favicondark.ico",
+         media: "(prefers-color-scheme: light)",
+      },
+   ],
+};
 export default function CartPage() {
-   const { cartItems, removeAllById } = useCart();
-   const groupedCartItems = groupCartItems(cartItems);
-   const total = groupedCartItems.reduce((sum, group) => sum + group.totalItem, 0);
-
-   const handleRemove = (id: string) => {
-      removeAllById(id);
-   };
-
-   return (
-      <>
-         <div className='container h-screen font-sans w-screen'>
-            <div className='flex flex-col justify-between py-20'>
-               <div className='mb-8'>
-                  <div className='flex flex-col items-start'>
-                     <h1 className='text-2xl font-normal my-16'>CART ({cartItems.length})</h1>
-                     <CartItems items={groupedCartItems} onRemove={handleRemove} />
-                  </div>
-               </div>
-            </div>
-            <CartFooter total={total} />
-         </div>
-      </>
-   );
+   return <CartClientWrapper></CartClientWrapper>;
 }

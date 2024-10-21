@@ -5,9 +5,6 @@ const config: Config = {
    theme: {
       container: {
          center: true,
-         screens: {
-            "2xl": "calc(100vw - 200px)",
-         },
       },
 
       extend: {

@@ -12,7 +12,7 @@ export default function Header() {
          className={`flex flex-col justify-between items-center top-0 w-full bg-white z-50 h-20 ${
             isCartPage ? "border-b border-black  fixed" : "sticky"
          }`}>
-         <div className='container flex justify-between items-center h-full'>
+         <div className='customcontainer flex justify-between items-center h-full'>
             <Logo></Logo>
             <CartButton></CartButton>
          </div>

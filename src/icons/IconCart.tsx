@@ -2,7 +2,7 @@ import React from "react";
 
 export default function IconCart() {
    return (
-      <svg width='13' height='16' viewBox='0 0 13 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <svg width='13' height='16' viewBox='0 0 13 16' xmlns='http://www.w3.org/2000/svg'>
          <path
             fillRule='evenodd'
             clipRule='evenodd'

@@ -43,7 +43,6 @@ export const metadata: Metadata = {
 export default async function Home({ searchParams }: { searchParams?: { search?: string } }) {
    const search = searchParams?.search;
    const productsAmount = await fetchProductsCount(search);
-   console.log(productsAmount);
 
    return (
       <>

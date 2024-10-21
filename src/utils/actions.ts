@@ -8,7 +8,7 @@ const API_KEY = process.env.API_KEY;
 
 export async function fetchAPI(endpoint: string, search?: string) {
    //To force the skeletons only
-   await new Promise((resolve) => setTimeout(resolve, 500));
+   // await new Promise((resolve) => setTimeout(resolve, 50000));
 
    if (API_KEY && API_URL) {
       const headers = {

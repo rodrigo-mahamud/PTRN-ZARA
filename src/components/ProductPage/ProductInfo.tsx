@@ -7,7 +7,7 @@ import { fetchAPI } from "@/utils/actions";
 export default async function ProductInfo({ id }: { id: string }) {
    const data: Product = await fetchAPI(`products/${id}`);
    return (
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24'>
          <div className='lg:flex lg:items-center lg:justify-between lg:space-x-8 h-full'>
             {/* Left column with image */}
             <div className='lg:w-1/2'>

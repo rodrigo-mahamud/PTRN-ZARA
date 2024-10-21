@@ -2,14 +2,13 @@ import React from "react";
 
 export default function SkeletonProductGrid() {
    return (
-      <div className='container animate-pulse'>
-         <div className='flex mt-12 flex-col w-full'>
-            <div className='h-10 bg-gray-200 w-full mb-16 mt-2'></div>
+      <div className='customcontainer animate-pulse'>
+         <div className='flex mt-6 flex-col w-full'>
             <div className='flex justify-start h-full items-center'>
                <div className='w-full'>
-                  <div className='flex'>
+                  <div className='flex flex-col md:flex-row'>
                      {[...Array(5)].map((_, index) => (
-                        <div key={index} className=' w-full min-w-0 border border-r-0 last:border-r border-gray-200 p-4'>
+                        <div key={index} className=' w-full min-w-0 border border-gray-200 p-4'>
                            <div className='flex flex-col items-center justify-center'>
                               <div className='relative w-4/6 m-16 aspect-square bg-gray-200'></div>
                               <div className='flex flex-col justify-center w-full gap-3'>
@@ -23,7 +22,7 @@ export default function SkeletonProductGrid() {
                         </div>
                      ))}
                   </div>
-                  <div className='flex'>
+                  <div className='hidden md:flex'>
                      {[...Array(5)].map((_, index) => (
                         <div key={index} className=' w-full min-w-0 border border-r-0 last:border-r border-gray-200 p-4'>
                            <div className='flex flex-col items-center justify-center'>

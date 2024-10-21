@@ -1,6 +1,6 @@
 export default function SkeletonProductInfo() {
    return (
-      <div className='max-w-7xl py-32 mx-auto px-4 sm:px-6 lg:px-8 animate-pulse'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-32 animate-pulse'>
          <div className='lg:flex lg:items-center lg:justify-between lg:space-x-8 h-full'>
             {/* Left column with image skeleton */}
             <div className='lg:w-5/12'>
@@ -8,7 +8,7 @@ export default function SkeletonProductInfo() {
             </div>
 
             {/* Right column with product details skeleton */}
-            <div className='flex flex-col gap-14 w-[30%]'>
+            <div className='flex flex-col gap-14 md:w-[30%] mt-6 md:mt-0'>
                <div className='flex flex-col gap-5'>
                   <div className='h-8 bg-gray-200 w-3/4'></div>
                   <div className='h-5 bg-gray-200 w-1/2'></div>
@@ -18,7 +18,7 @@ export default function SkeletonProductInfo() {
                <div className='flex flex-col gap-8'>
                   <div className='flex flex-col w-full gap-4'>
                      <div className='h-8 bg-gray-200'></div>
-                     <div className='flex'>
+                     <div className='flex w-full md:w-fit'>
                         {[...Array(3)].map((_, index) => (
                            <div key={`variation-${index}`} className='h-16 w-full border border-gray-300 bg-gray-200'></div>
                         ))}
