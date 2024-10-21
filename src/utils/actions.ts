@@ -8,7 +8,7 @@ const API_KEY = process.env.API_KEY;
 
 export async function fetchAPI(endpoint: string, search?: string) {
    //To force the skeletons only
-   // await new Promise((resolve) => setTimeout(resolve, 500));
+   // await new Promise((resolve) => setTimeout(resolve, 50000000));
 
    if (API_KEY && API_URL) {
       const headers = {
@@ -45,11 +45,11 @@ export async function processImage(imageUrl: string): Promise<string> {
       const processedImageBuffer = await sharp(buffer)
          .trim()
          .resize({
-            height: 250, // FIXED_HEIGHT
+            height: 225, // FIXED_HEIGHT
             fit: "contain",
             background: { r: 255, g: 255, b: 255, alpha: 0 },
          })
-         .webp({ quality: 50 }) // OUTPUT_QUALITY
+         .webp({ quality: 25 }) // OUTPUT_QUALITY
          .toBuffer();
 
       // Convert the processed image buffer to a Base64 string
