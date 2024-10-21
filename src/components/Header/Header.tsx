@@ -1,6 +1,6 @@
 "use client";
 import Logo from "@/icons/Logo";
-import CartButton from "../Cart/CartButton";
+import CartButton from "../CartComponents/CartButton";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
