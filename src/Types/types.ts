@@ -51,7 +51,7 @@ export type Product = {
    specs: ProductSpecs;
    colorOptions: ColorOption[];
    storageOptions: StorageOption[];
-   similarProducts: SimilarProduct[];
+   similarProducts?: SimilarProduct[];
 };
 
 export type NormalizedImageProps = {
