@@ -13,11 +13,11 @@ export const metadata: Metadata = {
    openGraph: {
       title: "Inicio | PTRN Rodrigo ",
       siteName: "Inicio | PTRN Rodrigo ",
-      url: `https://${process.env.VERCEL_URL}`,
+      url: `https://${process.env.ROOT_DOMAIN}`,
       description:
          "Creación de una aplicación web enfocada en la visualización,búsqueda y gestión de un catálogo de teléfonos móviles. La aplicación debe permitir a los usuarios consultar detalles específicos de cada dispositivo, así como gestionar un carrito de compras de manera eficiente ",
 
-      images: [`https://${process.env.VERCEL_URL}/metaogimage.png`],
+      images: [`https://${process.env.ROOT_DOMAIN}/metaogimage.png`],
       locale: "es_ES",
       type: "website",
    },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
       title: "Inicio | PTRN Rodrigo ",
       description:
          "Creación de una aplicación web enfocada en la visualización,búsqueda y gestión de un catálogo de teléfonos móviles. La aplicación debe permitir a los usuarios consultar detalles específicos de cada dispositivo, así como gestionar un carrito de compras de manera eficiente",
-      images: [`https://${process.env.VERCEL_URL}/metaogimage.png`],
+      images: [`https://${process.env.ROOT_DOMAIN}/metaogimage.png`],
    },
    icons: [
       {
@@ -43,7 +43,10 @@ export const metadata: Metadata = {
 export default async function Home(props: { searchParams?: Promise<{ search?: string }> }) {
    const searchParams = await props.searchParams;
    const search = searchParams?.search;
-   const productsAmount = await fetchProductsCount(search);
+   const productsAmount = await fetchProductsCount({
+      search: search,
+      useCache: true,
+   });
 
    return (
       <>

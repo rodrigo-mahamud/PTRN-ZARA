@@ -10,14 +10,9 @@ import { fetchAPI } from "@/utils/actions";
 import formatSlug from "@/utils/formatSlug";
 import { Metadata } from "next";
 
-async function getAllProducts(): Promise<Product[]> {
-   const products: Product[] = await fetchAPI("products");
-   return products;
-}
-
 export async function generateStaticParams() {
-   const products = await getAllProducts();
-   return products.map((product) => ({
+   const products = await fetchAPI("products", { useCache: false });
+   return products.map((product: { id: string; brand: string; name: string }) => ({
       segments: [formatSlug(product.brand, product.name), product.id],
    }));
 }
@@ -33,7 +28,7 @@ export async function generateMetadata(props: { params: Promise<{ segments: stri
       openGraph: {
          title: `${product.brand} ${product.name} | PTRN Rodrigo`,
          siteName: "PTRN Rodrigo",
-         url: `${process.env.VERCEL_URL}/${formatSlug(product.brand, product.name)}/${product.id}`,
+         url: `https://${process.env.ROOT_DOMAIN}/${formatSlug(product.brand, product.name)}/${product.id}`,
          description: `Detalles del ${product.brand} ${product.name}. ${product.description.slice(0, 150)}...`,
          images: [{ url: product.colorOptions[0].imageUrl }],
          locale: "es_ES",

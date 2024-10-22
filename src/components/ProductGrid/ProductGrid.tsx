@@ -1,10 +1,14 @@
 import { ProductTypes } from "@/Types/types";
-import { fetchAPI } from "@/utils/actions";
 import React from "react";
 import ProductCard from "./ProductCard";
 
+import { fetchAPI } from "@/utils/actions";
+
 export default async function ProductGrid({ searchParam }: { searchParam?: string }) {
-   const data: ProductTypes[] = await fetchAPI("products", searchParam);
+   const data: ProductTypes[] = await fetchAPI<ProductTypes[]>("products", {
+      search: searchParam,
+      useCache: true,
+   });
 
    return (
       <>
