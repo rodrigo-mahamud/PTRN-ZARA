@@ -7,7 +7,7 @@ import Link from "next/link";
 import NormalizedImage from "../NormalizedImage";
 
 export default async function ProductRelated({ id }: { id: string }) {
-   const data: Product = await fetchAPI(`products/${id}`);
+   const data: Product = await fetchAPI(`products/${id}`, { useCache: true });
 
    if (!data || !data.similarProducts || data.similarProducts.length === 0) {
       return null;

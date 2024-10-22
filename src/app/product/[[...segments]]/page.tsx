@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: { params: Promise<{ segments: string[] }> }): Promise<Metadata> {
    const params = await props.params;
    const id = params.segments[params.segments.length - 1];
-   const product: Product = await fetchAPI(`products/${id}`);
+   const product: Product = await fetchAPI(`products/${id}`, { useCache: true });
 
    return {
       title: `${product.brand} ${product.name} | PTRN Rodrigo`,
