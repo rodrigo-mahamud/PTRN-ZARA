@@ -1,6 +1,6 @@
 "use client";
-import IconCart from "@/icons/IconCart";
-import { useCart } from "@/utils/cartContext";
+import IconCart from "../../icons/IconCart";
+import { useCart } from "../../utils/cartContext";
 import Link from "next/link";
 import React from "react";
 
