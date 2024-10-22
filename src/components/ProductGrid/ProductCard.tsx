@@ -21,7 +21,7 @@ export default async function ProductCard({ productsData }: ProductDataTypes) {
                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw'
             />
          </div>
-         <div className='flex flex-col justify-center w-full gap-1 md:gap-2 group-hover:invert ease-in-out duration-300'>
+         <div className='flex flex-col justify-center w-full gap-1 md:gap-2 group-hover:invert delay-300 group-hover:delay-0'>
             <span className='line-clamp-1 text-muted text-xxs uppercase tracking-tight'>{productsData.brand}</span>
             <div className='flex justify-between items-center'>
                <h2 className='uppercase line-clamp-1 text-sm md:text-xs'>{productsData.name}</h2>

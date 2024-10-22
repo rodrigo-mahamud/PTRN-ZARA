@@ -87,7 +87,9 @@ export default function ProductVariations({ data }: { data: Product }) {
                         </div>
                      ))}
                   </div>
-                  <span className='text-xs mt-3'>{selectedColor?.name}</span>
+                  <span className={`${selectedColor?.name ? "text-xs mt-3 visible" : "text-xs mt-3 invisible"}`}>
+                     {selectedColor?.name ? selectedColor?.name : "Color"}
+                  </span>
                </div>
             </div>
          </div>

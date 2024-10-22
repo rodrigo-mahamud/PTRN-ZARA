@@ -18,7 +18,7 @@ export default function SkeletonProductInfo() {
                <div className='flex flex-col gap-8'>
                   <div className='flex flex-col w-full gap-4'>
                      <div className='h-8 bg-gray-200'></div>
-                     <div className='flex w-full md:w-fit'>
+                     <div className='flex w-full'>
                         {[...Array(3)].map((_, index) => (
                            <div key={`variation-${index}`} className='h-16 w-full border border-gray-300 bg-gray-200'></div>
                         ))}
