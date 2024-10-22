@@ -3,6 +3,7 @@ import sharp from "sharp";
 import { connectDB } from "@/utils/db/mongoose";
 import { CacheModel } from "@/utils/db/cache";
 import type { Product, ProductTypes } from "@/Types/types";
+import { ImageCacheModel } from "./db/imageCache";
 
 const API_URL = process.env.API_URL;
 const API_KEY = process.env.API_KEY;
@@ -131,12 +132,99 @@ export async function fetchProductsCount(options?: FetchOptions): Promise<number
    return products.length;
 }
 
+const IMAGE_CACHE_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 días en milisegundos
 export async function processImage(imageUrl: string): Promise<string> {
    try {
-      const response = await fetch(imageUrl);
+      await connectDB();
+
+      // Buscar en caché
+      const cachedImage = await ImageCacheModel.findOne({
+         originalUrl: imageUrl,
+      });
+
+      // Si existe en caché y no es muy antiguo, retornar
+      if (cachedImage) {
+         const isCacheFresh = Date.now() - cachedImage.lastUpdated.getTime() < IMAGE_CACHE_DURATION;
+
+         if (isCacheFresh) {
+            return cachedImage.base64Data;
+         }
+
+         // Si el caché está stale, lo actualizamos en background
+         Promise.resolve().then(async () => {
+            try {
+               const newBase64 = await processAndGenerateBase64(imageUrl);
+               await ImageCacheModel.findOneAndUpdate(
+                  { originalUrl: imageUrl },
+                  {
+                     base64Data: newBase64,
+                     lastUpdated: new Date(),
+                  },
+                  { upsert: true, new: true }
+               );
+            } catch (error) {
+               console.error("Error updating image cache:", error);
+            }
+         });
+
+         // Mientras tanto, retornamos la versión cacheada
+         return cachedImage.base64Data;
+      }
+
+      // Si no está en caché, procesar y guardar
+      const base64Data = await processAndGenerateBase64(imageUrl);
+
+      // Usar findOneAndUpdate con upsert en lugar de create
+      await ImageCacheModel.findOneAndUpdate(
+         { originalUrl: imageUrl },
+         {
+            base64Data,
+            lastUpdated: new Date(),
+         },
+         {
+            upsert: true, // Crear si no existe
+            new: true, // Retornar el documento actualizado
+            setDefaultsOnInsert: true, // Aplicar defaults si es inserción
+         }
+      );
+
+      return base64Data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   } catch (error: any) {
+      if (error.code === 11000) {
+         // Si hay un error de duplicado, intentamos obtener el documento existente
+         try {
+            const existingCache = await ImageCacheModel.findOne({
+               originalUrl: imageUrl,
+            });
+            if (existingCache) {
+               return existingCache.base64Data;
+            }
+         } catch (innerError) {
+            console.error("Error retrieving existing cache:", innerError);
+         }
+      }
+
+      console.error("Error in processImage:", error);
+      return imageUrl; // Fallback a la URL original
+   }
+}
+
+async function processAndGenerateBase64(imageUrl: string): Promise<string> {
+   const controller = new AbortController();
+   const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+   try {
+      const response = await fetch(imageUrl, {
+         signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
          throw new Error(`Failed to fetch image: ${response.statusText}`);
       }
+
       const arrayBuffer = await response.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
 
@@ -147,12 +235,16 @@ export async function processImage(imageUrl: string): Promise<string> {
             fit: "contain",
             background: { r: 255, g: 255, b: 255, alpha: 0 },
          })
-         .webp({ quality: 35 })
+         .webp({
+            quality: 35,
+            effort: 4,
+         })
          .toBuffer();
 
       return `data:image/webp;base64,${processedImageBuffer.toString("base64")}`;
    } catch (error) {
-      console.error("Error processing image:", error);
-      return imageUrl;
+      throw new Error(`Error processing image: ${error}`);
+   } finally {
+      clearTimeout(timeoutId);
    }
 }
