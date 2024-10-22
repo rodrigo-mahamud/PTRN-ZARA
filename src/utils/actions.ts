@@ -54,7 +54,8 @@ export async function fetchProductsCount(search?: string): Promise<number> {
       }
 
       const data = await response.json();
-      return data.count; // Asumiendo que la API devuelve un objeto con una propiedad 'count'
+
+      return data.length;
    }
 
    throw new Error("API_KEY o API_URL no están definidas");

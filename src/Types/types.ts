@@ -86,8 +86,7 @@ export type GroupedCartItem = {
 export type CartContextType = {
    cartItems: CartItem[];
    addToCart: (item: CartItem) => void;
-   removeFromCart: (itemId: string) => void;
-   removeAllById: (itemId: string) => void;
+   removeItem: (itemId: string, storage: string, color: string) => void;
    cartCount: number;
    isLoading: boolean;
 };

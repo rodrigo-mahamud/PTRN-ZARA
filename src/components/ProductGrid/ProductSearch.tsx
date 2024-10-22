@@ -3,7 +3,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import { useState, useEffect } from "react";
 
-export default function ProductSearch({ productsAmount = 24 }: { productsAmount: number }) {
+export default function ProductSearch({ productsAmount }: { productsAmount: number }) {
    const searchParams = useSearchParams();
    const pathName = usePathname();
    const { replace } = useRouter();

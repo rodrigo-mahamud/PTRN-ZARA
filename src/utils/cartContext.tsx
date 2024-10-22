@@ -26,18 +26,25 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setCartItems((prevItems) => [...prevItems, item]);
    }, []);
 
-   const removeFromCart = useCallback((itemId: string) => {
-      setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
-   }, []);
-
-   const removeAllById = useCallback((itemId: string) => {
-      setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+   const removeItem = useCallback((itemId: string, storage: string, color: string) => {
+      setCartItems((prevItems) =>
+         prevItems.filter((item) => !(item.id === itemId && item.selectedStorage === storage && item.selectedColor === color))
+      );
    }, []);
 
    const cartCount = cartItems.length;
 
    return (
-      <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, removeAllById, cartCount, isLoading }}>{children}</CartContext.Provider>
+      <CartContext.Provider
+         value={{
+            cartItems,
+            addToCart,
+            removeItem,
+            cartCount,
+            isLoading,
+         }}>
+         {children}
+      </CartContext.Provider>
    );
 };
 

@@ -44,6 +44,7 @@ export default async function Home(props: { searchParams?: Promise<{ search?: st
    const searchParams = await props.searchParams;
    const search = searchParams?.search;
    const productsAmount = await fetchProductsCount(search);
+   console.log(productsAmount);
 
    return (
       <>

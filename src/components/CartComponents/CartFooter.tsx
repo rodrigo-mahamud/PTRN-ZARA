@@ -4,7 +4,7 @@ export default function CartFooter({ total }: { total: number }) {
    return (
       <div className='fixed  bottom-0 bg-white z-50 '>
          <div className='customcontainer flex flex-col md:flex-row justify-between items-center md:h-28'>
-            <Link href='/' scroll={false} className=' hidden md:flex w-64 justify-center py-5 border border-gray-300 text-sm'>
+            <Link href='/' scroll={false} className=' hidden md:flex w-72 justify-center py-5 border border-gray-300 text-sm'>
                VOLVER A LA TIENDA
             </Link>
             <div className='flex items-center md:gap-20 w-full'>

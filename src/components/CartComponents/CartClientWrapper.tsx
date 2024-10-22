@@ -5,12 +5,12 @@ import { useCart } from "@/utils/cartContext";
 import groupCartItems from "@/utils/useGroupedCartItems";
 
 export default function CartClientWrapper() {
-   const { cartItems, removeAllById } = useCart();
+   const { cartItems, removeItem } = useCart();
    const groupedCartItems = groupCartItems(cartItems);
    const total = groupedCartItems.reduce((sum, group) => sum + group.totalItem, 0);
 
-   const handleRemove = (id: string) => {
-      removeAllById(id);
+   const handleRemove = (id: string, selectedStorage: string, selectedColor: string) => {
+      removeItem(id, selectedStorage, selectedColor);
    };
 
    return (

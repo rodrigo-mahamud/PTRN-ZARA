@@ -3,7 +3,7 @@ import { GroupedCartItem } from "@/Types/types";
 
 type CartItemsProps = {
    items: GroupedCartItem[];
-   onRemove: (id: string) => void;
+   onRemove: (id: string, selectedStorage: string, selectedColor: string) => void;
 };
 
 export default function CartItems({ items, onRemove }: CartItemsProps) {
@@ -34,7 +34,7 @@ export default function CartItems({ items, onRemove }: CartItemsProps) {
                            {group.basePrice} € x {group.amount} = {group.totalItem}€
                         </p>
                      </div>
-                     <button onClick={() => onRemove(group.id)} className='px-4 py-2 text-red-500'>
+                     <button onClick={() => onRemove(group.id, group.selectedStorage, group.selectedColor)} className='px-4 py-2 text-red-500'>
                         Eliminar
                      </button>
                   </div>
