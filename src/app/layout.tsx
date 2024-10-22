@@ -71,7 +71,7 @@ export default function RootLayout({
    children: React.ReactNode;
 }>) {
    return (
-      <html lang='es_ES'>
+      <html lang='es'>
          <body className={`${helveticaNeue.variable} arial sans-serif antialiased `}>
             <CartProvider>
                <Toaster

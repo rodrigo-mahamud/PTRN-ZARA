@@ -25,8 +25,8 @@ export default async function ProductRelated({ id }: { id: string }) {
          <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 '>
             <h2 className='text-xl font-light tracking-tight'>PRODUCTOS SIMILARES</h2>
             <ProductsCarrousel>
-               {processedSimilarProducts.map((product) => (
-                  <div key={product.id} className='flex-[0_0_90%] md:flex-[0_0_28%] min-w-0 border border-r-0 last:border-r border-black'>
+               {processedSimilarProducts.map((product, index) => (
+                  <div key={index} className='flex-[0_0_90%] md:flex-[0_0_28%] min-w-0 border border-r-0 last:border-r border-black'>
                      <Link
                         href={`/product/${formatSlug(product.brand, product.name)}/${product.id}`}
                         className='hoverProduct group p-4 w-full flex flex-col items-center justify-center relative'>

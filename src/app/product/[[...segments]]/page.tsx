@@ -22,7 +22,8 @@ export async function generateStaticParams() {
    }));
 }
 
-export async function generateMetadata({ params }: { params: { segments: string[] } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ segments: string[] }> }): Promise<Metadata> {
+   const params = await props.params;
    const id = params.segments[params.segments.length - 1];
    const product: Product = await fetchAPI(`products/${id}`);
 
@@ -57,7 +58,8 @@ export async function generateMetadata({ params }: { params: { segments: string[
    };
 }
 
-export default async function ProductPage({ params }: { params: { segments: string[] } }) {
+export default async function ProductPage(props: { params: Promise<{ segments: string[] }> }) {
+   const params = await props.params;
    const id = params.segments[params.segments.length - 1];
 
    return (

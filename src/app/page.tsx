@@ -13,7 +13,7 @@ export const metadata: Metadata = {
    openGraph: {
       title: "Inicio | PTRN Rodrigo ",
       siteName: "Inicio | PTRN Rodrigo ",
-      url: `${process.env.VERCEL_URL}`,
+      url: `https://${process.env.VERCEL_URL}`,
       description:
          "Creación de una aplicación web enfocada en la visualización,búsqueda y gestión de un catálogo de teléfonos móviles. La aplicación debe permitir a los usuarios consultar detalles específicos de cada dispositivo, así como gestionar un carrito de compras de manera eficiente ",
 
@@ -40,7 +40,8 @@ export const metadata: Metadata = {
    ],
 };
 
-export default async function Home({ searchParams }: { searchParams?: { search?: string } }) {
+export default async function Home(props: { searchParams?: Promise<{ search?: string }> }) {
+   const searchParams = await props.searchParams;
    const search = searchParams?.search;
    const productsAmount = await fetchProductsCount(search);
 

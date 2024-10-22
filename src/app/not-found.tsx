@@ -1,6 +1,21 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
-
+export const metadata: Metadata = {
+   title: "404 no encontrado | PTRN Rodrigo ",
+   description:
+      "Creación de una aplicación web enfocada en la visualización,búsqueda y gestión de un catálogo de teléfonos móviles. La aplicación debe permitir a los usuarios consultar detalles específicos de cada dispositivo, así como gestionar un carrito de compras de manera eficiente",
+   icons: [
+      {
+         url: "/images/favicon.ico",
+         media: "(prefers-color-scheme: dark)",
+      },
+      {
+         url: "/images/favicondark.ico",
+         media: "(prefers-color-scheme: light)",
+      },
+   ],
+};
 export default function NotFound() {
    return (
       <section className='bg-white'>
