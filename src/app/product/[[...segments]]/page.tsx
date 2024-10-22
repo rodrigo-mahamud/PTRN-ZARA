@@ -10,13 +10,6 @@ import { fetchAPI } from "@/utils/actions";
 import formatSlug from "@/utils/formatSlug";
 import { Metadata } from "next";
 
-export async function generateStaticParams() {
-   const products = await fetchAPI("products", { useCache: false });
-   return products.map((product: { id: string; brand: string; name: string }) => ({
-      segments: [formatSlug(product.brand, product.name), product.id],
-   }));
-}
-
 export async function generateMetadata(props: { params: Promise<{ segments: string[] }> }): Promise<Metadata> {
    const params = await props.params;
    const id = params.segments[params.segments.length - 1];
