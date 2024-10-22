@@ -7,9 +7,6 @@ import { NormalizedImageProps } from "@/Types/types";
 const imageCache = new Map<string, string>();
 
 async function getCachedImage(url: string): Promise<string> {
-   if (imageCache.has(url)) {
-      return imageCache.get(url)!;
-   }
    const base64Image = await processImage(url);
    imageCache.set(url, base64Image);
    return base64Image;

@@ -1,14 +1,21 @@
 import ProductInfo from "@/components/ProductPage/ProductInfo";
 import ProductRelated from "@/components/ProductPage/ProductRelated";
+import SkeletonProductRelated from "@/components/Skeletons/SkeletonProductGrid";
 import ProductSpecs from "@/components/ProductPage/ProductSpecs";
 import SkeletonProductInfo from "@/components/Skeletons/SkeletonProductInfo";
-import SkeletonProductRelated from "@/components/Skeletons/SkeletonProductGrid";
 import SkeletonProductSpecs from "@/components/Skeletons/SkeletonProductSpecs";
 import { Suspense } from "react";
 import { Product } from "@/Types/types";
 import { fetchAPI } from "@/utils/actions";
 import formatSlug from "@/utils/formatSlug";
 import { Metadata } from "next";
+
+export async function generateStaticParams() {
+   const products = await fetchAPI("products", { useCache: false });
+   return products.map((product: { id: string; brand: string; name: string }) => ({
+      segments: [formatSlug(product.brand, product.name), product.id],
+   }));
+}
 
 export async function generateMetadata(props: { params: Promise<{ segments: string[] }> }): Promise<Metadata> {
    const params = await props.params;

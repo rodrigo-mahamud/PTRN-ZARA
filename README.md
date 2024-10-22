@@ -150,7 +150,7 @@ ROOT_DOMAIN=tu_dominio
 git clone [url-repositorio]
 
 # Instalar dependencias
-npm install
+npm install --legacy-peer-deps
 
 # Ejecutar servidor de desarrollo
 npm run dev
